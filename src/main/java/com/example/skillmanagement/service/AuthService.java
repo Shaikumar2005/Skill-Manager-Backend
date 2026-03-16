@@ -2,12 +2,16 @@ package com.example.skillmanagement.service;
 
 import com.example.skillmanagement.dto.LoginRequest;
 import com.example.skillmanagement.dto.LoginResponse;
+import com.example.skillmanagement.dto.RegisterRequest;
+import com.example.skillmanagement.dto.UserResponse;
+import com.example.skillmanagement.model.Role;
 import com.example.skillmanagement.model.User;
 import com.example.skillmanagement.repo.UserRepository;
 import com.example.skillmanagement.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
@@ -18,13 +22,16 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
     private final UserRepository userRepo;
     private final JwtService jwtService;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthService(AuthenticationManager authenticationManager,
                        UserRepository userRepo,
-                       JwtService jwtService) {
+                       JwtService jwtService,
+                       PasswordEncoder passwordEncoder) {
         this.authenticationManager = authenticationManager;
         this.userRepo = userRepo;
         this.jwtService = jwtService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -65,6 +72,34 @@ public class AuthService {
                 user.getId(),
                 user.getName(),
                 user.getEmail()
+        );
+    }
+
+    /**
+     * Public self-registration. Always creates an EMPLOYEE user.
+     */
+    public UserResponse register(RegisterRequest req) {
+        if (req == null) {
+            throw new IllegalArgumentException("Registration payload is required");
+        }
+        if (userRepo.existsByEmail(req.getEmail())) {
+            throw new IllegalArgumentException("Email already exists: " + req.getEmail());
+        }
+
+        User user = new User(
+                req.getName().trim(),
+                req.getEmail().toLowerCase().trim(),
+                passwordEncoder.encode(req.getPassword()),
+                Role.EMPLOYEE // ALWAYS create employee on self-registration
+        );
+
+        user = userRepo.save(user);
+
+        return new UserResponse(
+                user.getId(),
+                user.getName(),
+                user.getEmail(),
+                user.getRole().name()
         );
     }
 }
