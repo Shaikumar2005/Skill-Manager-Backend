@@ -88,7 +88,7 @@ public class AuthService {
 
         User user = new User(
                 req.getName().trim(),
-                req.getEmail().toLowerCase().trim(),
+                req.getEmail().toLowerCase(),
                 passwordEncoder.encode(req.getPassword()),
                 Role.EMPLOYEE // ALWAYS create employee on self-registration
         );

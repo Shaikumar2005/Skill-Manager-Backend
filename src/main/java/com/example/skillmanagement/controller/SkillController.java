@@ -30,7 +30,7 @@ public class SkillController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<SkillDTO> update(@PathVariable Long id, @RequestBody @Valid SkillDTO dto){
+    public ResponseEntity<SkillDTO> update(@PathVariable("id") Long id,@RequestBody @Valid SkillDTO dto) {
         return ResponseEntity.ok(service.update(id, dto));
     }
 
@@ -40,4 +40,6 @@ public class SkillController {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
+    
+    
 }

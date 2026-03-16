@@ -1,7 +1,6 @@
 package com.example.skillmanagement.controller;
 
 import com.example.skillmanagement.dto.*;
-import com.example.skillmanagement.model.Role;
 import com.example.skillmanagement.model.User;
 import com.example.skillmanagement.repo.UserRepository;
 import com.example.skillmanagement.service.ProjectService;

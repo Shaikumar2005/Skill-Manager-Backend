@@ -25,15 +25,7 @@ public class DataInitializer {
                 userRepo.save(emp);
             }
 
-            // Sample Skills if empty
-            if (skillRepo.count() == 0) {
-                List<Skill> skills = List.of(
-                    new Skill("Java", "Backend"),
-                    new Skill("Angular", "Frontend"),
-                    new Skill("SQL", "Database")
-                );
-                skillRepo.saveAll(skills);
-            }
+           
         };
     }
 }
