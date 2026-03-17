@@ -1,125 +1,81 @@
-package com.example.skillmanagement.controller; 
+package com.example.skillmanagement.controller;
 
-  
+import com.example.skillmanagement.dto.EmployeeSkillRequest;
+import com.example.skillmanagement.dto.EmployeeSkillResponse;
+import com.example.skillmanagement.dto.EmployeeSkillUpdateRequest;
+import com.example.skillmanagement.model.User;
+import com.example.skillmanagement.repo.UserRepository;
+import com.example.skillmanagement.service.EmployeeSkillService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 
-import com.example.skillmanagement.dto.EmployeeSkillRequest; 
+import java.util.*;
 
-import com.example.skillmanagement.dto.EmployeeSkillResponse; 
+@CrossOrigin
+@RestController
+@RequestMapping("/employee")
+public class EmployeeController {
 
-import com.example.skillmanagement.model.User; 
+    private final EmployeeSkillService service;
+    private final UserRepository userRepo;
 
-import com.example.skillmanagement.repo.UserRepository; 
+    public EmployeeController(EmployeeSkillService service, UserRepository userRepo) {
+        this.service = service;
+        this.userRepo = userRepo;
+    }
 
-import com.example.skillmanagement.service.EmployeeSkillService; 
+    private Long currentUserId(Authentication auth) {
+        String email = auth.getName();
+        Optional<User> u = userRepo.findByEmail(email);
+        return u.map(User::getId).orElseThrow();
+    }
 
-import jakarta.validation.Valid; 
+    @GetMapping("/me")
+    public ResponseEntity<Map<String, Object>> getCurrentEmployee(Authentication auth) {
+        String email = auth.getName();
+        Optional<User> userOpt = userRepo.findByEmail(email);
 
-import org.springframework.http.ResponseEntity; 
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
 
-import org.springframework.security.core.Authentication; 
+        User user = userOpt.get();
+        Map<String, Object> response = new HashMap<>();
+        response.put("id", user.getId());
+        response.put("name", user.getName());
+        response.put("email", user.getEmail());
+        response.put("role", user.getRole());
 
-import org.springframework.web.bind.annotation.*; 
+        return ResponseEntity.ok(response);
+    }
 
-  
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @GetMapping("/skills")
+    public ResponseEntity<List<EmployeeSkillResponse>> mySkills(Authentication auth) {
+        return ResponseEntity.ok(service.getSkillsForUser(currentUserId(auth)));
+    }
 
-import java.util.*; 
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PostMapping("/skills")
+    public ResponseEntity<EmployeeSkillResponse> addMySkill(
+            Authentication auth,
+            @Valid @RequestBody EmployeeSkillRequest req) {
+        return ResponseEntity.ok(service.addEmployeeSkill(currentUserId(auth), req));
+    }
 
-  
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PutMapping("/skills/{id}")
+    public ResponseEntity<EmployeeSkillResponse> updateMySkill(
+            Authentication auth,
+            @PathVariable("id") Long id,   // ✅ explicitly specify the name
+            @Valid @RequestBody EmployeeSkillUpdateRequest req) {
+        return ResponseEntity.ok(service.updateEmployeeSkill(currentUserId(auth), id, req));
+    }
 
-@CrossOrigin 
 
-@RestController 
 
-@RequestMapping("/employee") 
 
-public class EmployeeController { 
-
-  
-
-    private final EmployeeSkillService service; 
-
-    private final UserRepository userRepo; 
-
-  
-
-    public EmployeeController(EmployeeSkillService service, UserRepository userRepo) { 
-
-        this.service = service; this.userRepo = userRepo; 
-
-    } 
-
-  
-
-    private Long currentUserId(Authentication auth) { 
-
-        String email = auth.getName(); 
-
-        Optional<User> u = userRepo.findByEmail(email); 
-
-        return u.map(User::getId).orElseThrow(); 
-
-    } 
-
-     
-
-    @GetMapping("/me") 
-
-    public ResponseEntity<Map<String, Object>> getCurrentEmployee(Authentication auth) { 
-
-        String email = auth.getName(); 
-
-        Optional<User> userOpt = userRepo.findByEmail(email); 
-
-  
-
-        if (userOpt.isEmpty()) { 
-
-            return ResponseEntity.notFound().build(); 
-
-        } 
-
-  
-
-        User user = userOpt.get(); 
-
-        Map<String, Object> response = new HashMap<>(); 
-
-        response.put("id", user.getId()); 
-
-        response.put("name", user.getName()); 
-
-        response.put("email", user.getEmail()); 
-
-        response.put("role", user.getRole()); 
-
-  
-
-        return ResponseEntity.ok(response); 
-
-    } 
-
-  
-
-  
-
-    @GetMapping("/skills") 
-
-    public ResponseEntity<List<EmployeeSkillResponse>> mySkills(Authentication auth) { 
-
-        return ResponseEntity.ok(service.getSkillsForUser(currentUserId(auth))); 
-
-    } 
-
-  
-
-    @PostMapping("/skills") 
-
-    public ResponseEntity<List<EmployeeSkillResponse>> upsertMySkills(Authentication auth, 
-
-                                                                      @RequestBody List<@Valid EmployeeSkillRequest> list) { 
-
-        return ResponseEntity.ok(service.upsertEmployeeSkills(currentUserId(auth), list)); 
-
-    } 
-
-} 
+}

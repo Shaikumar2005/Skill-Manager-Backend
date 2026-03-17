@@ -19,7 +19,7 @@ import org.springframework.web.cors.*;
 import java.util.List;
 
 @Configuration
-@EnableMethodSecurity
+@EnableMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
 
     private final JwtAuthenticationFilter jwtFilter;
@@ -32,31 +32,42 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
         http
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-
             .authorizeHttpRequests(auth -> auth
-            		
-            		.requestMatchers("/skills/all").permitAll()
 
+                // Public endpoints
+                .requestMatchers("/auth/login", "/auth/register").permitAll()
+
+
+                // Employees can view their own profile and skills
+                .requestMatchers("/employee/me").hasRole("EMPLOYEE")
+                .requestMatchers(HttpMethod.GET, "/employee/skills").hasAnyRole("EMPLOYEE","ADMIN")
+                .requestMatchers(HttpMethod.POST, "/employee/skills").hasRole("EMPLOYEE")
+                .requestMatchers(HttpMethod.PUT, "/employee/skills/**").hasRole("EMPLOYEE")
+                .requestMatchers(HttpMethod.DELETE, "/employee/skills/**").hasRole("EMPLOYEE")
+
+                // Skills catalog: employees can GET, admins can manage
+                .requestMatchers(HttpMethod.GET, "/skills/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .requestMatchers("/skills/all").permitAll()
+                
                 // 🔥 REQUIRED FIX — Allow ALL /skills endpoints
             		.requestMatchers("/skills/**").permitAll()
+                .requestMatchers(HttpMethod.PUT, "/skills/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/skills/**").hasRole("ADMIN")
 
-                // your original rules (unchanged)
-                .requestMatchers("/auth/login", "/auth/register").permitAll()
-                .requestMatchers("/login").permitAll()
-                .requestMatchers("/employee/me", "/employee/skills").authenticated()
+                // Projects: employees can GET, admins can manage
+                .requestMatchers(HttpMethod.GET, "/projects").hasAnyRole("EMPLOYEE","ADMIN")
+                .requestMatchers(HttpMethod.POST, "/projects").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.PUT, "/projects/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.DELETE, "/projects/**").hasRole("ADMIN")
 
-                .requestMatchers(HttpMethod.GET, "/skills").permitAll()
-                .requestMatchers(HttpMethod.GET, "/employee/skills").permitAll()
 
+                // Everything else requires authentication
                 .anyRequest().authenticated()
             )
-
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-
             .userDetailsService(userDetailsService);
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -67,10 +78,10 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("*"));
-        config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
-        config.setAllowCredentials(false);
+        config.setAllowedOrigins(List.of("http://localhost:4200")); // Angular dev origin
+        config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
+        config.setAllowedHeaders(List.of("Authorization","Content-Type"));
+        config.setAllowCredentials(true); // allow cookies/headers with specific origin
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);

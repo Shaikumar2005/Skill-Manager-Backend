@@ -2,6 +2,7 @@ package com.example.skillmanagement.service;
 
 import com.example.skillmanagement.dto.EmployeeSkillRequest;
 import com.example.skillmanagement.dto.EmployeeSkillResponse;
+import com.example.skillmanagement.dto.EmployeeSkillUpdateRequest;
 import com.example.skillmanagement.exception.ResourceNotFoundException;
 import com.example.skillmanagement.model.EmployeeSkill;
 import com.example.skillmanagement.model.Skill;
@@ -11,7 +12,7 @@ import com.example.skillmanagement.repo.UserRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,16 +29,16 @@ public class EmployeeSkillService {
     }
 
     /**
-     * Get all skills for a given user as DTOs.
+     * Get all skills for a user.
      */
     public List<EmployeeSkillResponse> getSkillsForUser(Long userId) {
-        if (userId == null) throw new IllegalArgumentException("User id is required");
         return repo.findByUserId(userId)
                 .stream()
                 .map(es -> new EmployeeSkillResponse(
                         es.getId(),
                         es.getSkill().getId(),
                         es.getSkill().getName(),
+                        es.getSkill().getCategory(),
                         es.getProficiencyLevel(),
                         es.getYearsOfExperience()
                 ))
@@ -45,52 +46,55 @@ public class EmployeeSkillService {
     }
 
     /**
-     * Upsert (create/update) multiple employee skills for a user.
-     * - If (user, skill) pair exists, update proficiency & experience.
-     * - Else create a new EmployeeSkill record.
+     * Add a new skill for an employee.
+     * Rejects duplicates instead of overwriting.
      */
     @Transactional
-    public List<EmployeeSkillResponse> upsertEmployeeSkills(Long userId, List<EmployeeSkillRequest> list) {
-        if (userId == null) throw new IllegalArgumentException("User id is required");
-        if (list == null) throw new IllegalArgumentException("Payload list is required");
-
+    public EmployeeSkillResponse addEmployeeSkill(Long userId, EmployeeSkillRequest req) {
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        List<EmployeeSkillResponse> responses = new ArrayList<>();
+        Skill skill = skillService.getById(req.getSkillId());
 
-        for (EmployeeSkillRequest req : list) {
-            if (req.getSkillId() == null) {
-                throw new IllegalArgumentException("skillId is required");
-            }
-            if (req.getProficiencyLevel() == null) {
-                throw new IllegalArgumentException("proficiencyLevel is required");
-            }
-            if (req.getYearsOfExperience() == null) {
-                throw new IllegalArgumentException("yearsOfExperience is required");
-            }
-
-            Skill skill = skillService.getById(req.getSkillId());
-
-            EmployeeSkill es = repo.findByUserIdAndSkillId(userId, req.getSkillId())
-                    .orElse(new EmployeeSkill(user, skill, req.getProficiencyLevel(), req.getYearsOfExperience()));
-
-            es.setUser(user);
-            es.setSkill(skill);
-            es.setProficiencyLevel(req.getProficiencyLevel());
-            es.setYearsOfExperience(req.getYearsOfExperience());
-
-            es = repo.save(es);
-
-            responses.add(new EmployeeSkillResponse(
-                    es.getId(),
-                    skill.getId(),
-                    skill.getName(),
-                    es.getProficiencyLevel(),
-                    es.getYearsOfExperience()
-            ));
+        if (repo.findByUserIdAndSkillId(userId, req.getSkillId()).isPresent()) {
+            throw new IllegalArgumentException("Skill already exists for this employee");
         }
 
-        return responses;
+        EmployeeSkill es = new EmployeeSkill(user, skill, req.getProficiencyLevel(), req.getYearsOfExperience());
+        repo.save(es);
+
+        return new EmployeeSkillResponse(
+                es.getId(),
+                skill.getId(),
+                skill.getName(),
+                skill.getCategory(),
+                es.getProficiencyLevel(),
+                es.getYearsOfExperience()
+        );
     }
+
+    /**
+     * Update an existing skill for an employee.
+     * Uses EmployeeSkillUpdateRequest (no skillId required).
+     */
+    @Transactional
+    public EmployeeSkillResponse updateEmployeeSkill(Long userId, Long id, EmployeeSkillUpdateRequest req) {
+        EmployeeSkill es = repo.findById(id)
+                .filter(s -> s.getUser().getId().equals(userId))
+                .orElseThrow(() -> new ResourceNotFoundException("Skill not found for this user"));
+
+        es.setProficiencyLevel(req.getProficiencyLevel());
+        es.setYearsOfExperience(req.getYearsOfExperience());
+        repo.save(es);
+
+        return new EmployeeSkillResponse(
+                es.getId(),
+                es.getSkill().getId(),
+                es.getSkill().getName(),
+                es.getSkill().getCategory(),
+                es.getProficiencyLevel(),
+                es.getYearsOfExperience()
+        );
+    }
+
 }
