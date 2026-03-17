@@ -1,16 +1,9 @@
 package com.example.skillmanagement.dto;
 
-public class EmployeeSkillRequest {
-    private Long skillId;
+public class EmployeeSkillUpdateRequest {
     private int proficiencyLevel;
     private int yearsOfExperience;
     // getters/setters
-	public Long getSkillId() {
-		return skillId;
-	}
-	public void setSkillId(Long skillId) {
-		this.skillId = skillId;
-	}
 	public int getProficiencyLevel() {
 		return proficiencyLevel;
 	}

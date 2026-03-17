@@ -2,6 +2,7 @@ package com.example.skillmanagement.controller;
 
 import com.example.skillmanagement.dto.EmployeeSkillRequest;
 import com.example.skillmanagement.dto.EmployeeSkillResponse;
+import com.example.skillmanagement.dto.EmployeeSkillUpdateRequest;
 import com.example.skillmanagement.model.User;
 import com.example.skillmanagement.repo.UserRepository;
 import com.example.skillmanagement.service.EmployeeSkillService;
@@ -59,9 +60,22 @@ public class EmployeeController {
 
     @PreAuthorize("hasRole('EMPLOYEE')")
     @PostMapping("/skills")
-    public ResponseEntity<List<EmployeeSkillResponse>> upsertMySkills(
+    public ResponseEntity<EmployeeSkillResponse> addMySkill(
             Authentication auth,
-            @RequestBody List<@Valid EmployeeSkillRequest> list) {
-        return ResponseEntity.ok(service.upsertEmployeeSkills(currentUserId(auth), list));
+            @Valid @RequestBody EmployeeSkillRequest req) {
+        return ResponseEntity.ok(service.addEmployeeSkill(currentUserId(auth), req));
     }
+
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @PutMapping("/skills/{id}")
+    public ResponseEntity<EmployeeSkillResponse> updateMySkill(
+            Authentication auth,
+            @PathVariable("id") Long id,   // ✅ explicitly specify the name
+            @Valid @RequestBody EmployeeSkillUpdateRequest req) {
+        return ResponseEntity.ok(service.updateEmployeeSkill(currentUserId(auth), id, req));
+    }
+
+
+
+
 }

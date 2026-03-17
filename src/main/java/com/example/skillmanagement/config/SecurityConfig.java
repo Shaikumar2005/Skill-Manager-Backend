@@ -47,8 +47,11 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/employee/skills/**").hasRole("EMPLOYEE")
 
                 // Skills catalog: employees can GET, admins can manage
-                .requestMatchers(HttpMethod.GET, "/skills").hasAnyRole("EMPLOYEE","ADMIN")
-                .requestMatchers(HttpMethod.POST, "/skills").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/skills/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .requestMatchers("/skills/all").permitAll()
+                
+                // 🔥 REQUIRED FIX — Allow ALL /skills endpoints
+            		.requestMatchers("/skills/**").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/skills/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/skills/**").hasRole("ADMIN")
 
