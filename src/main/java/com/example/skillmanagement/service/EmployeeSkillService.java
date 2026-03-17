@@ -35,12 +35,13 @@ public class EmployeeSkillService {
         return repo.findByUserId(userId)
                 .stream()
                 .map(es -> new EmployeeSkillResponse(
-                        es.getId(),
-                        es.getSkill().getId(),
-                        es.getSkill().getName(),
-                        es.getProficiencyLevel(),
-                        es.getYearsOfExperience()
-                ))
+                	    es.getId(),
+                	    es.getSkill().getId(),
+                	    es.getSkill().getName(),
+                	    es.getSkill().getCategory(),   // ✅ make sure this is here
+                	    es.getProficiencyLevel(),
+                	    es.getYearsOfExperience()
+                	))
                 .collect(Collectors.toList());
     }
 
@@ -86,6 +87,7 @@ public class EmployeeSkillService {
                     es.getId(),
                     skill.getId(),
                     skill.getName(),
+                    skill.getCategory(),
                     es.getProficiencyLevel(),
                     es.getYearsOfExperience()
             ));
