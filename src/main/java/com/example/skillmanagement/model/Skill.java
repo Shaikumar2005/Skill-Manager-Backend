@@ -1,5 +1,7 @@
 package com.example.skillmanagement.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -9,6 +11,11 @@ public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+
+@OneToMany(mappedBy = "skill", cascade = CascadeType.REMOVE)
+private List<EmployeeSkill> employeeSkills;
+
 
     @NotBlank
     private String name;

@@ -38,6 +38,8 @@ public class SecurityConfig {
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 
             .authorizeHttpRequests(auth -> auth
+            		
+            		.requestMatchers("/skills/all").permitAll()
 
                 // 🔥 REQUIRED FIX — Allow ALL /skills endpoints
             		.requestMatchers("/skills/**").permitAll()
