@@ -39,6 +39,14 @@ public class SecurityConfig {
 
                 // Public endpoints
                 .requestMatchers("/auth/login", "/auth/register").permitAll()
+                	
+                
+
+.requestMatchers(
+                "/swagger-ui.html",
+                "/swagger-ui/**",
+                "/v3/api-docs/**"
+            ).permitAll()
 
 
                 // Employees can view their own profile and skills
@@ -74,6 +82,8 @@ public class SecurityConfig {
 
         return http.build();
     }
+    
+   
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
