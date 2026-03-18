@@ -37,7 +37,7 @@ public class ProjectController {
         return new ResponseEntity<>(service.createProject(req), HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<ProjectResponse>> getAll() {
         return ResponseEntity.ok(service.getAllProjects());
     }
