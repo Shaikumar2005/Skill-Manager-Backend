@@ -8,4 +8,5 @@ import java.util.List;
 public interface ProjectRequiredSkillRepository extends JpaRepository<ProjectRequiredSkill, Long> {
     List<ProjectRequiredSkill> findByProjectId(Long projectId);
     boolean existsByProjectIdAndSkillId(Long projectId, Long skillId);
+    void deleteByProjectId(Long projectId);
 }

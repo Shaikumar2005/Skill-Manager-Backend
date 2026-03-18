@@ -31,8 +31,6 @@ public class ProjectService {
         this.userRepo = userRepo;
     }
 
-    
-
     /**
      * Create a new Project along with its required skills.
      */
@@ -42,12 +40,22 @@ public class ProjectService {
         if (req.getProjectName() == null || req.getProjectName().isBlank()) {
             throw new IllegalArgumentException("Project name is required");
         }
-        if (req.getRequiredSkills() == null) {
+        if (req.getRequiredSkills() == null || req.getRequiredSkills().isEmpty()) {
             throw new IllegalArgumentException("requiredSkills is required");
         }
 
         if (projectRepo.existsByProjectNameIgnoreCase(req.getProjectName())) {
             throw new IllegalArgumentException("Project already exists: " + req.getProjectName());
+        }
+
+        // ✅ Duplicate check
+        long distinctCount = req.getRequiredSkills().stream()
+                .map(RequiredSkillDTO::getSkillId)
+                .filter(Objects::nonNull)
+                .distinct()
+                .count();
+        if (distinctCount != req.getRequiredSkills().size()) {
+            throw new IllegalArgumentException("Duplicate skills are not allowed in a project");
         }
 
         Project p = new Project(req.getProjectName().trim());
@@ -61,9 +69,7 @@ public class ProjectService {
                 throw new IllegalArgumentException("requiredSkills.requiredLevel is required");
             }
             Skill s = skillService.getById(rs.getSkillId());
-            if (!prsRepo.existsByProjectIdAndSkillId(p.getId(), s.getId())) {
-                prsRepo.save(new ProjectRequiredSkill(p, s, rs.getRequiredLevel()));
-            }
+            prsRepo.save(new ProjectRequiredSkill(p, s, rs.getRequiredLevel()));
         }
 
         return getProjectResponse(p.getId());
@@ -100,7 +106,7 @@ public class ProjectService {
     }
 
     /**
-     * Compute skill gap.
+     * Compute skill gap for a user against a project.
      */
     public SkillGapResponse computeSkillGap(Long projectId, Long userId) {
         if (projectId == null) throw new IllegalArgumentException("projectId is required");
@@ -141,5 +147,24 @@ public class ProjectService {
         }
 
         return new SkillGapResponse(missing, insufficient);
+    }
+
+    /**
+     * Delete a project and its required skills.
+     */
+    @Transactional
+    public void deleteProject(Long projectId) {
+        if (projectId == null) {
+            throw new IllegalArgumentException("projectId is required");
+        }
+
+        Project p = projectRepo.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+
+        // Delete required skills first
+        prsRepo.deleteByProjectId(projectId);
+
+        // Delete project itself
+        projectRepo.delete(p);
     }
 }

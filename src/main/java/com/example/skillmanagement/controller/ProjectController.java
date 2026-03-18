@@ -25,54 +25,44 @@ public class ProjectController {
         this.userRepo = userRepo;
     }
 
-    // -----------------------------------------------------------
-    // 🔥 ADDED: For Angular — POST /projects/add
-    // -----------------------------------------------------------
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProjectResponse> createProject(@RequestBody @Valid ProjectRequest req) {
         return new ResponseEntity<>(service.createProject(req), HttpStatus.CREATED);
     }
 
-
-    // -----------------------------------------------------------
-    // Existing create (POST /projects)
-    // (Kept exactly as you wrote)
-    // -----------------------------------------------------------
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ProjectResponse> create(@RequestBody @Valid ProjectRequest req) {
         return new ResponseEntity<>(service.createProject(req), HttpStatus.CREATED);
     }
 
-    // -----------------------------------------------------------
-    // Existing GET all projects
-    // -----------------------------------------------------------
     @GetMapping
     public ResponseEntity<List<ProjectResponse>> getAll() {
         return ResponseEntity.ok(service.getAllProjects());
     }
 
-    // -----------------------------------------------------------
-    // Skill gap for current user
-    // -----------------------------------------------------------
     @GetMapping("/{projectId}/skill-gap")
     public ResponseEntity<SkillGapResponse> gapForCurrentUser(
-            @PathVariable Long projectId,
+            @PathVariable("projectId") Long projectId,
             Authentication auth) {
-
         User u = userRepo.findByEmail(auth.getName()).orElseThrow();
         return ResponseEntity.ok(service.computeSkillGap(projectId, u.getId()));
     }
 
-    // -----------------------------------------------------------
-    // Admin can compute gap for any user
-    // -----------------------------------------------------------
     @GetMapping("/{projectId}/skill-gap/{userId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SkillGapResponse> gapForUser(
-            @PathVariable Long projectId,
-            @PathVariable Long userId) {
+            @PathVariable("projectId") Long projectId,
+            @PathVariable("userId") Long userId) {
         return ResponseEntity.ok(service.computeSkillGap(projectId, userId));
+    }
+
+    // ✅ Delete project endpoint
+    @DeleteMapping("/{projectId}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<Void> deleteProject(@PathVariable("projectId") Long projectId) {
+        service.deleteProject(projectId);
+        return ResponseEntity.noContent().build();
     }
 }
