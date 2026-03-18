@@ -31,10 +31,22 @@ public class ProjectService {
         this.userRepo = userRepo;
     }
 
+    // ---------------------------------------------------------------------
+    // ⭐ ADDED METHOD → Fixes your error: getLastProjectId()
+    // ---------------------------------------------------------------------
+    public Long getLastProjectId() {
+        Long lastId = projectRepo.findMaxProjectId();
+        return lastId == null ? 0L : lastId;
+    }
+
+    // Optional helper for auto-increment (not used by frontend)
+    public Long getNextProjectId() {
+        return getLastProjectId() + 1;
+    }
+    // ---------------------------------------------------------------------
+
     /**
      * Create a new Project along with its required skills.
-     * - Validates unique project name.
-     * - Adds required skills with required level.
      */
     @Transactional
     public ProjectResponse createProject(ProjectRequest req) {
@@ -70,7 +82,7 @@ public class ProjectService {
     }
 
     /**
-     * Return all projects with their required skills (skillId + requiredLevel).
+     * Return all projects.
      */
     public List<ProjectResponse> getAllProjects() {
         return projectRepo.findAll()
@@ -80,7 +92,7 @@ public class ProjectService {
     }
 
     /**
-     * Build a ProjectResponse for the given project id.
+     * Build a ProjectResponse for given project ID.
      */
     public ProjectResponse getProjectResponse(Long projectId) {
         Project p = projectRepo.findById(projectId)
@@ -100,9 +112,7 @@ public class ProjectService {
     }
 
     /**
-     * Compute skill gaps for a user with respect to a project's required skills.
-     * - missingSkills: skills required by project that the user doesn't have at all
-     * - insufficientSkills: user has the skill but at a level lower than required
+     * Compute skill gap.
      */
     public SkillGapResponse computeSkillGap(Long projectId, Long userId) {
         if (projectId == null) throw new IllegalArgumentException("projectId is required");
