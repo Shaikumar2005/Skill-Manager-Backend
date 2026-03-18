@@ -34,13 +34,6 @@ public class ProjectController {
         return new ResponseEntity<>(service.createProject(req), HttpStatus.CREATED);
     }
 
-    // -----------------------------------------------------------
-    // 🔥 ADDED: Get last project Id → auto increment in Angular
-    // -----------------------------------------------------------
-    @GetMapping("/last-id")
-    public ResponseEntity<Long> getLastProjectId() {
-        return ResponseEntity.ok(service.getLastProjectId());
-    }
 
     // -----------------------------------------------------------
     // Existing create (POST /projects)

@@ -66,8 +66,8 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.DELETE, "/skills/**").hasRole("ADMIN")
 
                 // Project rules (unchanged)
-                .requestMatchers(HttpMethod.GET, "/projects").hasAnyRole("EMPLOYEE","ADMIN")
-                .requestMatchers(HttpMethod.POST, "/projects").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/projects/**").hasAnyRole("EMPLOYEE","ADMIN")
+                .requestMatchers(HttpMethod.POST, "/projects/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/projects/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/projects/**").hasRole("ADMIN")
 

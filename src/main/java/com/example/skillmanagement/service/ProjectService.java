@@ -31,19 +31,7 @@ public class ProjectService {
         this.userRepo = userRepo;
     }
 
-    // ---------------------------------------------------------------------
-    // ⭐ ADDED METHOD → Fixes your error: getLastProjectId()
-    // ---------------------------------------------------------------------
-    public Long getLastProjectId() {
-        Long lastId = projectRepo.findMaxProjectId();
-        return lastId == null ? 0L : lastId;
-    }
-
-    // Optional helper for auto-increment (not used by frontend)
-    public Long getNextProjectId() {
-        return getLastProjectId() + 1;
-    }
-    // ---------------------------------------------------------------------
+    
 
     /**
      * Create a new Project along with its required skills.
