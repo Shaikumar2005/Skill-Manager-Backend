@@ -25,7 +25,8 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtFilter;
     private final UserDetailsServiceImpl userDetailsService;
 
-    public SecurityConfig(JwtAuthenticationFilter jwtFilter, UserDetailsServiceImpl userDetailsService) {
+    public SecurityConfig(JwtAuthenticationFilter jwtFilter,
+                          UserDetailsServiceImpl userDetailsService) {
         this.jwtFilter = jwtFilter;
         this.userDetailsService = userDetailsService;
     }
@@ -35,46 +36,45 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
             .authorizeHttpRequests(auth -> auth
 
-                // Public endpoints
+                // Public endpoints (no login)
                 .requestMatchers("/auth/login", "/auth/register").permitAll()
-                	
-                
 
-.requestMatchers(
-                "/swagger-ui.html",
-                "/swagger-ui/**",
-                "/v3/api-docs/**"
-            ).permitAll()
+                // Swagger allowed publicly
+                .requestMatchers(
+                        "/swagger-ui.html",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**"
+                ).permitAll()
 
+                // FIX: allow all skills endpoints BEFORE restrictions
+                .requestMatchers("/skills/all").permitAll()
+                .requestMatchers("/skills/**").permitAll()
 
-                // Employees can view their own profile and skills
+                // Employee profile & skills
                 .requestMatchers("/employee/me").hasRole("EMPLOYEE")
                 .requestMatchers(HttpMethod.GET, "/employee/skills").hasAnyRole("EMPLOYEE","ADMIN")
                 .requestMatchers(HttpMethod.POST, "/employee/skills").hasRole("EMPLOYEE")
                 .requestMatchers(HttpMethod.PUT, "/employee/skills/**").hasRole("EMPLOYEE")
                 .requestMatchers(HttpMethod.DELETE, "/employee/skills/**").hasRole("EMPLOYEE")
 
-                // Skills catalog: employees can GET, admins can manage
+                // Skills catalog (original rules – left unchanged)
                 .requestMatchers(HttpMethod.GET, "/skills/**").hasAnyRole("EMPLOYEE","ADMIN")
-                .requestMatchers("/skills/all").permitAll()
-                
-                // 🔥 REQUIRED FIX — Allow ALL /skills endpoints
-            		.requestMatchers("/skills/**").permitAll()
                 .requestMatchers(HttpMethod.PUT, "/skills/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/skills/**").hasRole("ADMIN")
 
-                // Projects: employees can GET, admins can manage
+                // Project rules (unchanged)
                 .requestMatchers(HttpMethod.GET, "/projects").hasAnyRole("EMPLOYEE","ADMIN")
                 .requestMatchers(HttpMethod.POST, "/projects").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.PUT, "/projects/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.DELETE, "/projects/**").hasRole("ADMIN")
 
-
                 // Everything else requires authentication
                 .anyRequest().authenticated()
             )
+
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .userDetailsService(userDetailsService);
 
@@ -82,16 +82,14 @@ public class SecurityConfig {
 
         return http.build();
     }
-    
-   
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:4200")); // Angular dev origin
+        config.setAllowedOrigins(List.of("http://localhost:4200"));
         config.setAllowedMethods(List.of("GET","POST","PUT","DELETE","OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization","Content-Type"));
-        config.setAllowCredentials(true); // allow cookies/headers with specific origin
+        config.setAllowCredentials(true); 
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
