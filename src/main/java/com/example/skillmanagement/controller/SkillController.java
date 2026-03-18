@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/skills")
@@ -39,9 +40,18 @@ public class SkillController {
         return ResponseEntity.ok(updated);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteSkill(@PathVariable Long id) {
-        service.delete(id);
-        return ResponseEntity.ok("Skill deleted successfully");
-    }
+    // ✅ FIXED DELETE ENDPOINT
+    // ❌ Your old code had WRONG path:  @DeleteMapping("/skills/delete/{id}")
+    // ✔ Now corrected to:             /skills/delete/{id}
+
+@DeleteMapping("/delete/{id}")
+public ResponseEntity<Map<String, String>> deleteSkill(@PathVariable Long id) {
+
+    service.delete(id);
+
+    return ResponseEntity.ok(
+            Map.of("message", "Skill deleted successfully")
+    );
+}
+
 }
