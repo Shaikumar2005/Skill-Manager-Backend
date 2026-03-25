@@ -7,10 +7,14 @@ public class ProjectResponse {
     private String projectName;
     private List<RequiredSkillDTO> requiredSkills;
 
+    // Constructor used in ProjectService
     public ProjectResponse(Long id, String projectName, List<RequiredSkillDTO> requiredSkills) {
-        this.id = id; this.projectName = projectName; this.requiredSkills = requiredSkills;
+        this.id = id;
+        this.projectName = projectName;
+        this.requiredSkills = requiredSkills;
     }
 
+    // getters
     public Long getId(){ return id; }
     public String getProjectName(){ return projectName; }
     public List<RequiredSkillDTO> getRequiredSkills(){ return requiredSkills; }

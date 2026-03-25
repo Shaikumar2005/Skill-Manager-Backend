@@ -1,6 +1,8 @@
 package com.example.skillmanagement.controller;
 
-import com.example.skillmanagement.dto.*;
+import com.example.skillmanagement.dto.ProjectRequest;
+import com.example.skillmanagement.dto.ProjectResponse;
+import com.example.skillmanagement.dto.SkillGapResponse;
 import com.example.skillmanagement.model.User;
 import com.example.skillmanagement.repo.UserRepository;
 import com.example.skillmanagement.service.ProjectService;
@@ -39,6 +41,7 @@ public class ProjectController {
 
     @GetMapping("/all")
     public ResponseEntity<List<ProjectResponse>> getAll() {
+        // ✅ service.getAllProjects() should return ProjectResponse objects
         return ResponseEntity.ok(service.getAllProjects());
     }
 
@@ -58,7 +61,6 @@ public class ProjectController {
         return ResponseEntity.ok(service.computeSkillGap(projectId, userId));
     }
 
-    // ✅ Delete project endpoint
     @DeleteMapping("/{projectId}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteProject(@PathVariable("projectId") Long projectId) {

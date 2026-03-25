@@ -1,22 +1,22 @@
 package com.example.skillmanagement.dto;
 
+import com.example.skillmanagement.model.EmployeeSkill;
+
 public class EmployeeSkillResponse {
     private Long id;
     private Long skillId;
     private String skillName;
-    private String category;              // ✅ add category
+    private String category;
     private Integer proficiencyLevel;
     private Integer yearsOfExperience;
 
-    public EmployeeSkillResponse(Long id, Long skillId, String skillName,
-                                 String category, Integer proficiencyLevel,
-                                 Integer yearsOfExperience) {
-        this.id = id;
-        this.skillId = skillId;
-        this.skillName = skillName;
-        this.category = category;
-        this.proficiencyLevel = proficiencyLevel;
-        this.yearsOfExperience = yearsOfExperience;
+    public EmployeeSkillResponse(EmployeeSkill es) {
+        this.id = es.getId();
+        this.skillId = es.getSkill().getId();
+        this.skillName = es.getSkill().getName();     // ✅ include skill name
+        this.category = es.getSkill().getCategory();
+        this.proficiencyLevel = es.getProficiencyLevel();
+        this.yearsOfExperience = es.getYearsOfExperience();
     }
 
     // getters

@@ -29,8 +29,7 @@ public class EmployeeController {
 
     private Long currentUserId(Authentication auth) {
         String email = auth.getName();
-        Optional<User> u = userRepo.findByEmail(email);
-        return u.map(User::getId).orElseThrow();
+        return userRepo.findByEmail(email).map(User::getId).orElseThrow();
     }
 
     @GetMapping("/me")
@@ -55,6 +54,7 @@ public class EmployeeController {
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/skills")
     public ResponseEntity<List<EmployeeSkillResponse>> mySkills(Authentication auth) {
+        // ✅ service.getSkillsForUser should return EmployeeSkillResponse objects
         return ResponseEntity.ok(service.getSkillsForUser(currentUserId(auth)));
     }
 
@@ -70,12 +70,8 @@ public class EmployeeController {
     @PutMapping("/skills/{id}")
     public ResponseEntity<EmployeeSkillResponse> updateMySkill(
             Authentication auth,
-            @PathVariable("id") Long id,   // ✅ explicitly specify the name
+            @PathVariable("id") Long id,
             @Valid @RequestBody EmployeeSkillUpdateRequest req) {
         return ResponseEntity.ok(service.updateEmployeeSkill(currentUserId(auth), id, req));
     }
-
-
-
-
 }

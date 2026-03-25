@@ -1,15 +1,21 @@
 package com.example.skillmanagement.dto;
 
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-
 public class RequiredSkillDTO {
-    @NotNull private Long skillId;
-    @NotNull @Min(1) @Max(5) private Integer requiredLevel;
+    private Long skillId;
+    private String skillName;
+    private String category;
+    private Integer requiredLevel;
 
+    public RequiredSkillDTO(Long skillId, String skillName, String category, Integer requiredLevel) {
+        this.skillId = skillId;
+        this.skillName = skillName;
+        this.category = category;
+        this.requiredLevel = requiredLevel;
+    }
+
+    // getters
     public Long getSkillId(){ return skillId; }
-    public void setSkillId(Long skillId){ this.skillId = skillId; }
+    public String getSkillName(){ return skillName; }
+    public String getCategory(){ return category; }
     public Integer getRequiredLevel(){ return requiredLevel; }
-    public void setRequiredLevel(Integer requiredLevel){ this.requiredLevel = requiredLevel; }
 }

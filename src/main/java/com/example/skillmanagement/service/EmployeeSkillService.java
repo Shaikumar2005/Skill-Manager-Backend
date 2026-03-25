@@ -34,20 +34,12 @@ public class EmployeeSkillService {
     public List<EmployeeSkillResponse> getSkillsForUser(Long userId) {
         return repo.findByUserId(userId)
                 .stream()
-                .map(es -> new EmployeeSkillResponse(
-                        es.getId(),
-                        es.getSkill().getId(),
-                        es.getSkill().getName(),
-                        es.getSkill().getCategory(),
-                        es.getProficiencyLevel(),
-                        es.getYearsOfExperience()
-                ))
+                .map(EmployeeSkillResponse::new)   // ✅ use DTO constructor
                 .collect(Collectors.toList());
     }
 
     /**
      * Add a new skill for an employee.
-     * Rejects duplicates instead of overwriting.
      */
     @Transactional
     public EmployeeSkillResponse addEmployeeSkill(Long userId, EmployeeSkillRequest req) {
@@ -63,20 +55,9 @@ public class EmployeeSkillService {
         EmployeeSkill es = new EmployeeSkill(user, skill, req.getProficiencyLevel(), req.getYearsOfExperience());
         repo.save(es);
 
-        return new EmployeeSkillResponse(
-                es.getId(),
-                skill.getId(),
-                skill.getName(),
-                skill.getCategory(),
-                es.getProficiencyLevel(),
-                es.getYearsOfExperience()
-        );
+        return new EmployeeSkillResponse(es);   // ✅ return DTO
     }
 
-    /**
-     * Update an existing skill for an employee.
-     * Uses EmployeeSkillUpdateRequest (no skillId required).
-     */
     @Transactional
     public EmployeeSkillResponse updateEmployeeSkill(Long userId, Long id, EmployeeSkillUpdateRequest req) {
         EmployeeSkill es = repo.findById(id)
@@ -87,14 +68,6 @@ public class EmployeeSkillService {
         es.setYearsOfExperience(req.getYearsOfExperience());
         repo.save(es);
 
-        return new EmployeeSkillResponse(
-                es.getId(),
-                es.getSkill().getId(),
-                es.getSkill().getName(),
-                es.getSkill().getCategory(),
-                es.getProficiencyLevel(),
-                es.getYearsOfExperience()
-        );
+        return new EmployeeSkillResponse(es);   // ✅ return DTO
     }
-
 }

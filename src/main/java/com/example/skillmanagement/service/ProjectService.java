@@ -1,6 +1,10 @@
 package com.example.skillmanagement.service;
 
-import com.example.skillmanagement.dto.*;
+import com.example.skillmanagement.dto.ProjectRequest;
+import com.example.skillmanagement.dto.ProjectResponse;
+import com.example.skillmanagement.dto.RequiredSkillDTO;
+import com.example.skillmanagement.dto.SkillDTO;
+import com.example.skillmanagement.dto.SkillGapResponse;
 import com.example.skillmanagement.exception.ResourceNotFoundException;
 import com.example.skillmanagement.model.*;
 import com.example.skillmanagement.repo.*;
@@ -31,9 +35,6 @@ public class ProjectService {
         this.userRepo = userRepo;
     }
 
-    /**
-     * Create a new Project along with its required skills.
-     */
     @Transactional
     public ProjectResponse createProject(ProjectRequest req) {
         if (req == null) throw new IllegalArgumentException("Project payload is required");
@@ -48,7 +49,6 @@ public class ProjectService {
             throw new IllegalArgumentException("Project already exists: " + req.getProjectName());
         }
 
-        // ✅ Duplicate check
         long distinctCount = req.getRequiredSkills().stream()
                 .map(RequiredSkillDTO::getSkillId)
                 .filter(Objects::nonNull)
@@ -62,12 +62,6 @@ public class ProjectService {
         p = projectRepo.save(p);
 
         for (RequiredSkillDTO rs : req.getRequiredSkills()) {
-            if (rs.getSkillId() == null) {
-                throw new IllegalArgumentException("requiredSkills.skillId is required");
-            }
-            if (rs.getRequiredLevel() == null) {
-                throw new IllegalArgumentException("requiredSkills.requiredLevel is required");
-            }
             Skill s = skillService.getById(rs.getSkillId());
             prsRepo.save(new ProjectRequiredSkill(p, s, rs.getRequiredLevel()));
         }
@@ -75,9 +69,6 @@ public class ProjectService {
         return getProjectResponse(p.getId());
     }
 
-    /**
-     * Return all projects.
-     */
     public List<ProjectResponse> getAllProjects() {
         return projectRepo.findAll()
                 .stream()
@@ -85,33 +76,24 @@ public class ProjectService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Build a ProjectResponse for given project ID.
-     */
     public ProjectResponse getProjectResponse(Long projectId) {
         Project p = projectRepo.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
         List<RequiredSkillDTO> reqs = prsRepo.findByProjectId(projectId)
                 .stream()
-                .map(prs -> {
-                    RequiredSkillDTO dto = new RequiredSkillDTO();
-                    dto.setSkillId(prs.getSkill().getId());
-                    dto.setRequiredLevel(prs.getRequiredLevel());
-                    return dto;
-                })
+                .map(prs -> new RequiredSkillDTO(
+                        prs.getSkill().getId(),
+                        prs.getSkill().getName(),        // ✅ include skill name
+                        prs.getSkill().getCategory(),
+                        prs.getRequiredLevel()
+                ))
                 .collect(Collectors.toList());
 
-        return new ProjectResponse(p.getId(), p.getProjectName(), reqs);
+        return new ProjectResponse(p.getId(), p.getProjectName(), reqs);  // ✅ use reqs
     }
 
-    /**
-     * Compute skill gap for a user against a project.
-     */
     public SkillGapResponse computeSkillGap(Long projectId, Long userId) {
-        if (projectId == null) throw new IllegalArgumentException("projectId is required");
-        if (userId == null) throw new IllegalArgumentException("userId is required");
-
         Project p = projectRepo.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
@@ -149,22 +131,12 @@ public class ProjectService {
         return new SkillGapResponse(missing, insufficient);
     }
 
-    /**
-     * Delete a project and its required skills.
-     */
     @Transactional
     public void deleteProject(Long projectId) {
-        if (projectId == null) {
-            throw new IllegalArgumentException("projectId is required");
-        }
-
         Project p = projectRepo.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
-        // Delete required skills first
         prsRepo.deleteByProjectId(projectId);
-
-        // Delete project itself
         projectRepo.delete(p);
     }
 }
