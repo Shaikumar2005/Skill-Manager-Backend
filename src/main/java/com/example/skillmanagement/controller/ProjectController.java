@@ -12,7 +12,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -67,4 +69,22 @@ public class ProjectController {
         service.deleteProject(projectId);
         return ResponseEntity.noContent().build();
     }
+    
+    @GetMapping("/{projectId}/qualified-employees")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<List<Map<String,Object>>> getQualifiedEmployees(@PathVariable Long projectId) {
+        List<User> qualified = service.getEmployeesFullyQualified(projectId);
+
+     
+        List<Map<String,Object>> response = qualified.stream().map(u -> {
+            Map<String,Object> m = new HashMap<>();
+            m.put("id", u.getId());
+            m.put("name", u.getName());
+            m.put("email", u.getEmail());
+            return m;
+        }).toList();
+
+        return ResponseEntity.ok(response);
+    }
+
 }

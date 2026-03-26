@@ -139,4 +139,28 @@ public class ProjectService {
         prsRepo.deleteByProjectId(projectId);
         projectRepo.delete(p);
     }
+    
+    public List<User> getEmployeesFullyQualified(Long projectId) {
+        Project p = projectRepo.findById(projectId)
+                .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
+
+        List<ProjectRequiredSkill> requiredSkills = prsRepo.findByProjectId(projectId);
+
+        List<User> allEmployees = userRepo.findByRole(Role.EMPLOYEE);// adjust query as needed
+
+        return allEmployees.stream()
+                .filter(emp -> {
+                    List<EmployeeSkill> empSkills = employeeSkillRepo.findByUserId(emp.getId());
+                    Map<Long, EmployeeSkill> empSkillMap = empSkills.stream()
+                            .collect(Collectors.toMap(es -> es.getSkill().getId(), es -> es));
+
+                    // Check every required skill
+                    return requiredSkills.stream().allMatch(req -> {
+                        EmployeeSkill es = empSkillMap.get(req.getSkill().getId());
+                        return es != null && es.getProficiencyLevel() >= req.getRequiredLevel();
+                    });
+                })
+                .collect(Collectors.toList());
+    }
+
 }
