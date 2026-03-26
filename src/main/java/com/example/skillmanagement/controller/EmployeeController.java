@@ -59,7 +59,7 @@ public class EmployeeController {
     }
 
     @PreAuthorize("hasRole('EMPLOYEE')")
-    @PostMapping("/skills")
+    @PostMapping("/skills/add")
     public ResponseEntity<EmployeeSkillResponse> addMySkill(
             Authentication auth,
             @Valid @RequestBody EmployeeSkillRequest req) {
