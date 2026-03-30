@@ -54,7 +54,6 @@ public class EmployeeController {
     @PreAuthorize("hasRole('EMPLOYEE')")
     @GetMapping("/skills")
     public ResponseEntity<List<EmployeeSkillResponse>> mySkills(Authentication auth) {
-        // ✅ service.getSkillsForUser should return EmployeeSkillResponse objects
         return ResponseEntity.ok(service.getSkillsForUser(currentUserId(auth)));
     }
 
@@ -73,5 +72,14 @@ public class EmployeeController {
             @PathVariable("id") Long id,
             @Valid @RequestBody EmployeeSkillUpdateRequest req) {
         return ResponseEntity.ok(service.updateEmployeeSkill(currentUserId(auth), id, req));
+    }
+
+    /** ✅ Delete endpoint matches Angular call */
+    @PreAuthorize("hasRole('EMPLOYEE')")
+    @DeleteMapping("/skills/delete/{id}")
+    public ResponseEntity<Void> deleteMySkill(Authentication auth,
+                                              @PathVariable("id") Long id) {
+        service.deleteEmployeeSkill(currentUserId(auth), id);
+        return ResponseEntity.noContent().build();
     }
 }

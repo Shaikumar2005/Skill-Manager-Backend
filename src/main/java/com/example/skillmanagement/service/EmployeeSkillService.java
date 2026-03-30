@@ -28,19 +28,15 @@ public class EmployeeSkillService {
         this.userRepo = userRepo;
     }
 
-    /**
-     * Get all skills for a user.
-     */
+    /** Get all skills for a user */
     public List<EmployeeSkillResponse> getSkillsForUser(Long userId) {
         return repo.findByUserId(userId)
                 .stream()
-                .map(EmployeeSkillResponse::new)   // ✅ use DTO constructor
+                .map(EmployeeSkillResponse::new)
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Add a new skill for an employee.
-     */
+    /** Add a new skill for an employee */
     @Transactional
     public EmployeeSkillResponse addEmployeeSkill(Long userId, EmployeeSkillRequest req) {
         User user = userRepo.findById(userId)
@@ -55,9 +51,10 @@ public class EmployeeSkillService {
         EmployeeSkill es = new EmployeeSkill(user, skill, req.getProficiencyLevel(), req.getYearsOfExperience());
         repo.save(es);
 
-        return new EmployeeSkillResponse(es);   // ✅ return DTO
+        return new EmployeeSkillResponse(es);
     }
 
+    /** Update an employee skill */
     @Transactional
     public EmployeeSkillResponse updateEmployeeSkill(Long userId, Long id, EmployeeSkillUpdateRequest req) {
         EmployeeSkill es = repo.findById(id)
@@ -68,6 +65,15 @@ public class EmployeeSkillService {
         es.setYearsOfExperience(req.getYearsOfExperience());
         repo.save(es);
 
-        return new EmployeeSkillResponse(es);   // ✅ return DTO
+        return new EmployeeSkillResponse(es);
+    }
+
+    /** ✅ Delete an employee skill */
+    @Transactional
+    public void deleteEmployeeSkill(Long userId, Long skillId) {
+        EmployeeSkill es = repo.findById(skillId)
+                .filter(s -> s.getUser().getId().equals(userId))
+                .orElseThrow(() -> new ResourceNotFoundException("Skill not found for this user"));
+        repo.delete(es);
     }
 }

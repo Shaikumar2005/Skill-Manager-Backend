@@ -84,13 +84,13 @@ public class ProjectService {
                 .stream()
                 .map(prs -> new RequiredSkillDTO(
                         prs.getSkill().getId(),
-                        prs.getSkill().getName(),        // ✅ include skill name
+                        prs.getSkill().getName(),
                         prs.getSkill().getCategory(),
                         prs.getRequiredLevel()
                 ))
                 .collect(Collectors.toList());
 
-        return new ProjectResponse(p.getId(), p.getProjectName(), reqs);  // ✅ use reqs
+        return new ProjectResponse(p.getId(), p.getProjectName(), reqs);
     }
 
     public SkillGapResponse computeSkillGap(Long projectId, Long userId) {
@@ -139,14 +139,14 @@ public class ProjectService {
         prsRepo.deleteByProjectId(projectId);
         projectRepo.delete(p);
     }
-    
+
     public List<User> getEmployeesFullyQualified(Long projectId) {
         Project p = projectRepo.findById(projectId)
                 .orElseThrow(() -> new ResourceNotFoundException("Project not found"));
 
         List<ProjectRequiredSkill> requiredSkills = prsRepo.findByProjectId(projectId);
 
-        List<User> allEmployees = userRepo.findByRole(Role.EMPLOYEE);// adjust query as needed
+        List<User> allEmployees = userRepo.findByRole(Role.EMPLOYEE);
 
         return allEmployees.stream()
                 .filter(emp -> {
@@ -154,13 +154,11 @@ public class ProjectService {
                     Map<Long, EmployeeSkill> empSkillMap = empSkills.stream()
                             .collect(Collectors.toMap(es -> es.getSkill().getId(), es -> es));
 
-                    // Check every required skill
-                    return requiredSkills.stream().allMatch(req -> {
-                        EmployeeSkill es = empSkillMap.get(req.getSkill().getId());
-                        return es != null && es.getProficiencyLevel() >= req.getRequiredLevel();
-                    });
+                    // ✅ Only check that every required skill exists, ignore proficiency level
+                    return requiredSkills.stream().allMatch(req ->
+                            empSkillMap.containsKey(req.getSkill().getId())
+                    );
                 })
                 .collect(Collectors.toList());
     }
-
 }
