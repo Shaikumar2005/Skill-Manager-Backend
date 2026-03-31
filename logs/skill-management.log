@@ -1,91 +1,151 @@
-2026-03-30 10:20:16 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 1984 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
-2026-03-30 10:20:16 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
-2026-03-30 10:20:16 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-30 10:20:20 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-30 10:20:20 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2026-03-30 10:20:20 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-03-30 10:20:21 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-03-30 10:20:21 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-03-30 10:20:21 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-03-30 10:20:22 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-30 10:20:22 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7fc1fd31
-2026-03-30 10:20:22 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-30 10:20:24 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-30 10:20:25 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2026-03-30 10:20:26 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-30 10:20:28 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 12.846 seconds (process running for 13.93)
-2026-03-30 10:22:39 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-30 12:30:52 WARN  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=23m58s203ms895µs700ns).
-2026-03-30 13:33:53 INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 797 ms
-2026-03-30 14:30:19 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 20784 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
-2026-03-30 14:30:19 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
-2026-03-30 14:30:19 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-30 14:30:21 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-30 14:30:21 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2026-03-30 14:30:21 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-03-30 14:30:21 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-03-30 14:30:22 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-03-30 14:30:22 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-03-30 14:30:22 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-30 14:30:23 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@fde487b
-2026-03-30 14:30:23 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-30 14:30:24 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-30 14:30:25 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2026-03-30 14:30:26 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-30 14:30:27 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 8.491 seconds (process running for 9.056)
-2026-03-30 14:32:09 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-30 14:35:03 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 12444 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
-2026-03-30 14:35:03 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
-2026-03-30 14:35:03 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-30 14:35:05 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-30 14:35:05 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2026-03-30 14:35:05 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-03-30 14:35:06 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-03-30 14:35:06 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-03-30 14:35:06 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-03-30 14:35:06 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-30 14:35:07 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b34c7c9
-2026-03-30 14:35:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-30 14:35:08 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-30 14:35:09 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2026-03-30 14:35:10 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-30 14:35:10 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 7.505 seconds (process running for 7.99)
-2026-03-30 14:35:31 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-30 15:52:22 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 24268 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
-2026-03-30 15:52:22 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
-2026-03-30 15:52:22 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-30 15:52:24 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-30 15:52:24 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2026-03-30 15:52:24 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-03-30 15:52:24 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-03-30 15:52:24 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-03-30 15:52:24 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-03-30 15:52:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-30 15:52:25 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@f3876ef
-2026-03-30 15:52:25 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-30 15:52:27 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-30 15:52:27 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2026-03-30 15:52:28 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-30 15:52:29 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 7.542 seconds (process running for 8.092)
-2026-03-30 15:53:28 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-30 16:45:56 WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 1451, SQLState: 23000
-2026-03-30 16:45:56 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Cannot delete or update a parent row: a foreign key constraint fails (`skill_mgmt`.`project_required_skills`, CONSTRAINT `FK6fw9a3uxnf8i360y5i2pgblv7` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`))
-2026-03-30 16:54:10 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 26656 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
-2026-03-30 16:54:10 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
-2026-03-30 16:54:10 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
-2026-03-30 16:54:12 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
-2026-03-30 16:54:12 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
-2026-03-30 16:54:12 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
-2026-03-30 16:54:13 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-03-30 16:54:13 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
-2026-03-30 16:54:13 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
-2026-03-30 16:54:13 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
-2026-03-30 16:54:14 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3bcc8f13
-2026-03-30 16:54:14 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
-2026-03-30 16:54:15 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-2026-03-30 16:54:15 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
-2026-03-30 16:54:16 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2026-03-30 16:54:17 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 7.62 seconds (process running for 8.145)
-2026-03-30 16:57:50 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2026-03-30 16:59:31 WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 1451, SQLState: 23000
-2026-03-30 16:59:31 ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper - Cannot delete or update a parent row: a foreign key constraint fails (`skill_mgmt`.`project_required_skills`, CONSTRAINT `FK6fw9a3uxnf8i360y5i2pgblv7` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`))
+2026-03-31 11:49:25 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 27152 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
+2026-03-31 11:49:25 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-03-31 11:49:25 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 11:49:29 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 11:49:29 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-03-31 11:49:29 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-31 11:49:29 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31 11:49:30 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-31 11:49:30 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-31 11:49:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 11:49:31 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2f6f4ac4
+2026-03-31 11:49:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 11:49:34 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 11:49:35 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-03-31 11:49:36 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-31 11:49:37 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 12.634 seconds (process running for 13.36)
+2026-03-31 11:56:40 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-31 12:00:04 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 10676 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
+2026-03-31 12:00:04 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-03-31 12:00:04 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 12:00:07 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 12:00:07 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-03-31 12:00:07 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-31 12:00:08 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31 12:00:08 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-31 12:00:08 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-31 12:00:09 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 12:00:10 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4c8d45cf
+2026-03-31 12:00:10 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 12:00:12 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 12:00:13 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-03-31 12:00:15 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-31 12:00:16 WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-03-31 12:00:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-31 12:00:16 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-31 12:00:16 ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9090 or configure this application to listen on another port.
+
+2026-03-31 12:00:41 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 21896 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
+2026-03-31 12:00:41 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-03-31 12:00:41 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 12:00:44 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 12:00:44 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-03-31 12:00:44 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-31 12:00:45 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31 12:00:45 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-31 12:00:45 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-31 12:00:46 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 12:00:46 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b34c7c9
+2026-03-31 12:00:46 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 12:00:48 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 12:00:49 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-03-31 12:00:50 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-31 12:00:51 WARN  org.springframework.boot.web.servlet.context.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2026-03-31 12:00:51 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2026-03-31 12:00:51 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2026-03-31 12:00:51 ERROR org.springframework.boot.diagnostics.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 9090 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 9090 or configure this application to listen on another port.
+
+2026-03-31 12:03:01 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 2980 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
+2026-03-31 12:03:01 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-03-31 12:03:01 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 12:03:03 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 12:03:03 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-03-31 12:03:03 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-31 12:03:04 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31 12:03:04 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-31 12:03:04 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-31 12:03:04 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 12:03:05 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6f112f70
+2026-03-31 12:03:05 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 12:03:07 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 12:03:07 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-03-31 12:03:08 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-31 12:03:09 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 9.355 seconds (process running for 10.048)
+2026-03-31 12:03:44 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-31 12:26:46 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 17364 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
+2026-03-31 12:26:46 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-03-31 12:26:46 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 12:26:48 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 12:26:48 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-03-31 12:26:48 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-31 12:26:49 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31 12:26:49 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-31 12:26:49 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-31 12:26:49 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 12:26:50 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3cb04dd
+2026-03-31 12:26:50 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 12:26:51 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 12:26:51 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-03-31 12:26:52 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-31 12:26:53 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 7.186 seconds (process running for 7.713)
+2026-03-31 12:28:07 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-31 13:08:55 INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 478 ms
+2026-03-31 13:53:35 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 22620 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
+2026-03-31 13:53:35 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-03-31 13:53:35 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 13:53:38 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 13:53:38 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-03-31 13:53:38 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-31 13:53:38 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31 13:53:39 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-31 13:53:39 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-31 13:53:39 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 13:53:40 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@b34c7c9
+2026-03-31 13:53:40 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 13:53:42 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 13:53:42 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-03-31 13:53:44 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-31 13:53:45 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 10.861 seconds (process running for 11.738)
+2026-03-31 13:57:12 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-03-31 13:57:13 INFO  org.springdoc.api.AbstractOpenApiResource - Init duration for springdoc-openapi is: 560 ms
+2026-03-31 13:59:54 INFO  com.example.skillmanagement.SkillManagementApplication - Starting SkillManagementApplication using Java 21.0.9 with PID 18436 (C:\Users\m.shanmugapriya\git\Skill-Manager-Backend\target\classes started by m.shanmugapriya in C:\Users\m.shanmugapriya\git\Skill-Manager-Backend)
+2026-03-31 13:59:54 DEBUG com.example.skillmanagement.SkillManagementApplication - Running with Spring Boot v3.3.1, Spring v6.1.10
+2026-03-31 13:59:54 INFO  com.example.skillmanagement.SkillManagementApplication - No active profile set, falling back to 1 default profile: "default"
+2026-03-31 13:59:57 INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2026-03-31 13:59:57 INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.25]
+2026-03-31 13:59:57 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2026-03-31 13:59:57 INFO  org.hibernate.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-03-31 13:59:58 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2026-03-31 13:59:58 INFO  org.hibernate.cache.internal.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2026-03-31 13:59:58 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2026-03-31 13:59:59 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@3bcc8f13
+2026-03-31 13:59:59 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2026-03-31 14:00:01 INFO  org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-03-31 14:00:01 DEBUG com.example.skillmanagement.security.JwtAuthenticationFilter - Filter 'jwtAuthenticationFilter' configured for use
+2026-03-31 14:00:03 WARN  org.springframework.boot.autoconfigure.orm.jpa.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-03-31 14:00:04 INFO  com.example.skillmanagement.SkillManagementApplication - Started SkillManagementApplication in 10.561 seconds (process running for 11.274)
+2026-03-31 14:00:10 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'

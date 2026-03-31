@@ -35,32 +35,10 @@ public class ProjectController {
         return new ResponseEntity<>(service.createProject(req), HttpStatus.CREATED);
     }
 
-    @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<ProjectResponse> create(@RequestBody @Valid ProjectRequest req) {
-        return new ResponseEntity<>(service.createProject(req), HttpStatus.CREATED);
-    }
-
     @GetMapping("/all")
     public ResponseEntity<List<ProjectResponse>> getAll() {
         // ✅ service.getAllProjects() should return ProjectResponse objects
         return ResponseEntity.ok(service.getAllProjects());
-    }
-
-    @GetMapping("/{projectId}/skill-gap")
-    public ResponseEntity<SkillGapResponse> gapForCurrentUser(
-            @PathVariable("projectId") Long projectId,
-            Authentication auth) {
-        User u = userRepo.findByEmail(auth.getName()).orElseThrow();
-        return ResponseEntity.ok(service.computeSkillGap(projectId, u.getId()));
-    }
-
-    @GetMapping("/{projectId}/skill-gap/{userId}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<SkillGapResponse> gapForUser(
-            @PathVariable("projectId") Long projectId,
-            @PathVariable("userId") Long userId) {
-        return ResponseEntity.ok(service.computeSkillGap(projectId, userId));
     }
 
     @DeleteMapping("/{projectId}")
