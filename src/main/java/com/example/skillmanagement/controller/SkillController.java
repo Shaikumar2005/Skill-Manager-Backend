@@ -31,14 +31,6 @@ public class SkillController {
         return ResponseEntity.ok(saved);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<SkillDTO> updateSkill(
-            @PathVariable Long id,
-            @RequestBody SkillDTO dto
-    ) {
-        SkillDTO updated = service.update(id, dto);
-        return ResponseEntity.ok(updated);
-    }
 
     // ✅ FIXED DELETE ENDPOINT
     // ❌ Your old code had WRONG path:  @DeleteMapping("/skills/delete/{id}")
